@@ -10,6 +10,10 @@ jobs:
     executor: docker-publisher
     steps:
     - checkout
+    - run:
+        name: Checkout Pelican Plugins
+        command: |
+          git clone 'https://github.com/getpelican/pelican-plugins.git' pelican-plugins
     - setup_remote_docker
     - run:
         name: Build Docker image
