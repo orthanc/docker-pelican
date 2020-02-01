@@ -37,16 +37,16 @@ jobs:
     - run:
         name: Calculate Tag Names
         command: |
-          PYTHON_VERSION="$(docker run --rm $IMAGE_NAME python --version | sed -e 's/^Python /')"
+          PYTHON_VERSION="$(docker run --rm $IMAGE_NAME python --version | sed -e 's/^Python //')"
           PYTHON_MINOR_VERSION="${PYTHON_VERSION%.*}"
           PYTHON_MAJOR_VERSION="${PYTHON_MINOR_VERSION%.*}"
           PELICAN_VERSION="$(docker run --rm $IMAGE_NAME pelican --version)"
           PELICAN_MINOR_VERSION="${PELICAN_VERSION%.*}"
           PELICAN_MAJOR_VERSION="${PELICAN_MINOR_VERSION%.*}"
 
-          echo "export FULL_VERSION_TAG_NAME='aws-cli-${PELICAN_VERSION}_python-${PYTHON_VERSION}_build-${CIRCLE_BUILD_NUM}'" >> $BASH_ENV
-          echo "export MINOR_VERSION_TAG_NAME='aws-cli-${PELICAN_MINOR_VERSION}_python-${PYTHON_MINOR_VERSION}'" >> $BASH_ENV
-          echo "export MAJOR_VERSION_TAG_NAME='aws-cli-${PELICAN_MAJOR_VERSION}_python-${PYTHON_MAJOR_VERSION}'" >> $BASH_ENV
+          echo "export FULL_VERSION_TAG_NAME='pelican-${PELICAN_VERSION}_python-${PYTHON_VERSION}_build-${CIRCLE_BUILD_NUM}'" >> $BASH_ENV
+          echo "export MINOR_VERSION_TAG_NAME='pelican-${PELICAN_MINOR_VERSION}_python-${PYTHON_MINOR_VERSION}'" >> $BASH_ENV
+          echo "export MAJOR_VERSION_TAG_NAME='pelican-${PELICAN_MAJOR_VERSION}_python-${PYTHON_MAJOR_VERSION}'" >> $BASH_ENV
     - run:
         name: Publish Docker Image to Docker Hub
         command: |
